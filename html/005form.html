@@ -5,7 +5,7 @@
 <body>
 	<h1>Angular Form</h1>
 	<form ng-controller="FormController">
-		<label>I have: <input ng-model="funding.having" ng-change="calcNeed()"></label>
+		<label>I have: <input ng-model="funding.having"></label>
 		<br />
 		<label>Still need: <input ng-model="funding.need"></label>
 		<br>
@@ -28,6 +28,7 @@
 		$scope.calcNeed = function(){
 			$scope.funding.need = $scope.funding.estimate - $scope.funding.having;
 		}
+		$scope.$watch('funding.having', $scope.calcNeed);
 	});
 </script>
 </html>
