@@ -6,12 +6,14 @@
 <body ng-controller="CartController">
 	<h1>Your Order</h1>
 	<div ng-repeat="item in items">
+		<span>{{$index + 1}}</span>
 		<span>{{item.title}}</span>
 		<input type="text" ng-model="item.quantity" />
 		<span>{{item.price | currency}}</span>
 		<span>{{item.price * item.quantity | currency}}</span>
 		<button ng-click="remove($index)">Remove</button>
 	</div>
+	<button ng-click="insert()">Insert</button>
 	<script>
 	function CartController($scope){
 		$scope.items = [
@@ -22,6 +24,10 @@
 		
 		$scope.remove = function($index){
 			$scope.items.splice($index, 1);
+		}
+
+		$scope.insert = function(){
+			$scope.items.splice(1, 0, {title: "Tea", quantity:5, price: 7.95});
 		}
 	}
 	</script>
