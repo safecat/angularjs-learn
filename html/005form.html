@@ -4,7 +4,7 @@
 </head>
 <body>
 	<h1>Angular Form</h1>
-	<form ng-controller="FormController">
+	<form ng-controller="FormController" ng-submit="calcNeed()">
 		<label>I have: <input ng-model="funding.having"></label>
 		<br />
 		<label>Still need: <input ng-model="funding.need"></label>
@@ -13,6 +13,9 @@
 			Agreement: <input type="checkbox" ng-model="agree">
 			(It's {{agree}} for now.)
 		</label>
+		<br />
+		<button type="submit">Submit</button>
+		<button ng-click="reset()">Reset</button>
 	</form>
 </body>
 <script src="../angular.1.3.8.js"></script>
@@ -28,7 +31,11 @@
 		$scope.calcNeed = function(){
 			$scope.funding.need = $scope.funding.estimate - $scope.funding.having;
 		}
-		$scope.$watch('funding.having', $scope.calcNeed);
+		$scope.reset = function(){
+			$scope.funding.having = 0;
+			$scope.agree = true;
+			$scope.calcNeed();
+		}
 	});
 </script>
 </html>
