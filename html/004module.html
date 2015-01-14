@@ -1,0 +1,17 @@
+<html ng-app="myApp">
+<head>
+	<title>Angular with module</title>
+	<script src="../angular.1.3.8.js"></script>
+</head>
+<body ng-controller="TextController">
+	<p>{{someText.message}}</p>
+</body>
+<script>
+	var myAppModule = angular.module('myApp', []);
+	myAppModule.controller('TextController', function($scope){
+		var someText = {};
+		someText.message = "I started my journey.";
+		$scope.someText = someText;
+	});
+</script>
+</html>
