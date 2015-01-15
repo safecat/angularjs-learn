@@ -15,7 +15,7 @@
 		<br>
 		<label>
 			Agreement: <input type="checkbox" ng-model="agree">
-			(It's <span class="{{agreeColor}}">{{agree}}</span> for now.)
+			(It's <span ng-class="agree ? 'green' : 'red'">{{agree}}</span> for now.)
 		</label>
 		<br />
 		<span ng-hide="agree">You have to agree to submit.</span>
@@ -42,9 +42,6 @@
 			$scope.agree = true;
 			$scope.calcNeed();
 		}
-		$scope.$watch("agree", function(){
-			$scope.agreeColor = $scope.agree ? "green" : "red";
-		});
 	});
 </script>
 </html>
