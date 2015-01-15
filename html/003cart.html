@@ -18,6 +18,9 @@
 		<button ng-click="remove($index)">Remove</button>
 	</div>
 	<button ng-click="insert()">Insert</button>
+	<p>Total: {{bill.total |currency}}</p>
+	<p>Discount: {{bill.discount | currency}}</p>
+	<p>Sub-total: {{bill.subtotal | currency}}</p>
 	<script>
 	function CartController($scope){
 		$scope.items = [
@@ -26,6 +29,11 @@
 			{title: "Pebbles", quantity: 5, price: 6.95, src:"feed"}
 		];
 		$scope.selectRow;
+		$scope.bill = {
+			total:0,
+			discount:0,
+			subtotal:0
+		}
 		
 		$scope.remove = function($index){
 			$scope.items.splice($index, 1);
@@ -38,6 +46,16 @@
 		$scope.selectRow = function(i){
 			$scope.selectedRow = i;
 		}
+
+		$scope.$watch(function(){
+			var total = 0;
+			for(var i in $scope.items){
+				total += $scope.items[i].quantity * $scope.items[i].price;
+			}
+			$scope.bill.total = total;
+			$scope.bill.discount = total > 100 ? 10 : 0;
+			$scope.bill.subtotal = total - $scope.bill.discount;
+		});
 	}
 	</script>
 </body>
