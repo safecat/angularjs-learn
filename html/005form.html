@@ -2,6 +2,10 @@
 <head>
 	<title>Angular form</title>
 </head>
+<style>
+.red{color: red;}
+.green{color: green;}
+</style>
 <body>
 	<h1>Angular Form</h1>
 	<form ng-controller="FormController" ng-submit="calcNeed()">
@@ -11,7 +15,7 @@
 		<br>
 		<label>
 			Agreement: <input type="checkbox" ng-model="agree">
-			(It's {{agree}} for now.)
+			(It's <span class="{{agreeColor}}">{{agree}}</span> for now.)
 		</label>
 		<br />
 		<span ng-hide="agree">You have to agree to submit.</span>
@@ -38,6 +42,9 @@
 			$scope.agree = true;
 			$scope.calcNeed();
 		}
+		$scope.$watch("agree", function(){
+			$scope.agreeColor = $scope.agree ? "green" : "red";
+		});
 	});
 </script>
 </html>
