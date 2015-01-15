@@ -14,7 +14,9 @@
 			(It's {{agree}} for now.)
 		</label>
 		<br />
-		<button type="submit">Submit</button>
+		<span ng-hide="agree">You have to agree to submit.</span>
+		<br>
+		<button type="submit" ng-disabled="!agree">Submit</button>
 		<button ng-click="reset()">Reset</button>
 	</form>
 </body>
