@@ -5,7 +5,7 @@
 <body ng-controller="ShoppingController">
 	<div ng-repeat="item in items">
 		<span>{{$index + 1}}</span>
-		<span>{{item.title}}</span>
+		<span>{{item.title|titleCase}}</span>
 		<input type="text" ng-model="item.quantity" />
 		<span>{{item.price | currency:"￥"}}</span>
 		<span>{{item.price * item.quantity | currency:"￥"}}</span>
@@ -19,15 +19,24 @@
 		items.query = function(){
 			// In real case, we'll request data from server
 			return [
-				{title: "Paint pots", quantity: 8, price: 3.95, src: "picture_add"},
-				{title: "Polka dots", quantity: 17, price: 12.95, src: "lorry"},
-				{title: "Pebbles", quantity: 5, price: 6.95, src:"feed"}
+				{title: "paint pots", quantity: 8, price: 3.95, src: "picture_add"},
+				{title: "polka dots", quantity: 17, price: 12.95, src: "lorry"},
+				{title: "pebbles", quantity: 5, price: 6.95, src:"feed"}
 			];
 		}
 		return items;
-	})
+	});
 	shoppingModule.controller('ShoppingController', function($scope, items){
 		$scope.items = items.query();
+	});
+	shoppingModule.filter('titleCase', function(){
+		return function(input){
+			var words = input.split(' ');
+		    for (var i = 0; i < words.length; i++) {
+		    	words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+		    }
+		    return words.join(' ');
+		};
 	});
 </script>
 </html>
