@@ -4,6 +4,7 @@
 	<script src="../angular.1.2.28.js"></script>
 	<style>
 	.selected{color: #f00;}
+	.ng-invalid{border:1px solid red;}
 	</style>
 </head>
 <body ng-controller="CartController">
@@ -12,7 +13,7 @@
 		<span>{{$index + 1}}</span>
 		<span><img ng-src="http://www.famfamfam.com/lab/icons/silk/icons/{{item.src}}.png" height="16" alt=""></span>
 		<span>{{item.title}}</span>
-		<input type="text" ng-model="item.quantity" />
+		<input type="number" ng-model="item.quantity" max="100" />
 		<span>{{item.price | currency}}</span>
 		<span>{{item.price * item.quantity | currency}}</span>
 		<button ng-click="remove($index)">Remove</button>
